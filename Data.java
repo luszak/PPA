@@ -209,4 +209,52 @@ public class Data {
             System.out.print("   ");
         }
     }
+
+    public int[][] generateKoggeStone(int width, int height){
+        int[][] scheme = new int[height+1][width];
+        int counter, value;
+        for (int i=0; i<height;i++){
+            counter = (int)Math.pow(2,i);
+            for (int j=0; j<counter; j++){
+                scheme[i][j] = -1;
+            }
+            value = 0;
+            for (int j=counter; j<width; j++){
+                scheme[i][j] = value;
+                value++;
+            }
+        }
+        for (int i=0; i<width; i++){
+            scheme[height][i]=-1;
+        }
+        return scheme;
+    }
+
+    public int[][] generateSklansky(int width, int height){
+        int[][] scheme = new int[height+1][width];
+        int counter, value=0, index;
+        for (int i=0; i<height; i++){
+            counter = (int)Math.pow(2,i);
+            index = 0;
+            for (;index<width;){
+                for (int j=0; j<counter;j++){
+                    if (index >= width)
+                        break;
+                    scheme[i][index] = -1;
+                    value = index;
+                    index++;
+                }
+                for (int l=0; l<counter;l++){
+                    if (index >= width)
+                        break;
+                    scheme[i][index] = value;
+                    index++;
+                }
+            }
+        }
+        for (int i=0; i<width; i++){
+            scheme[height][i]=-1;
+        }
+        return scheme;
+    }
 }

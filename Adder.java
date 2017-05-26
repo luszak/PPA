@@ -3,7 +3,7 @@ public class Adder{
     private Line[] line;
     private CarryDigit carryDigit;
     private boolean[] output;
-    // 0 - Sklansky, 1 - Kogge&Stone
+    // 1 - Sklansky, 0 - Kogge&Stone
     private boolean schemeType;
     int[][] scheme;
     int linesNumber;
@@ -23,9 +23,9 @@ public class Adder{
         data = new Data(firstNumber, secondNumber);
         this.schemeType = schemeType;
         if (!this.schemeType)
-            scheme = data.SklanskyNodesScheme;
+            scheme = data.generateKoggeStone(data.getWidth(), data.getHeight());
         else
-            scheme = data.KoggeStoneNodesScheme;
+            scheme = data.generateSklansky(data.getWidth(), data.getHeight());
         line = new Line[max];
         linesNumber = max;
         for (int i=0; i<linesNumber; i++){
@@ -67,5 +67,6 @@ public class Adder{
         data.showGenerators();
         data.showGraph();
         data.showOutput();
+        System.out.println();
     }
 }
