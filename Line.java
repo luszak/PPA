@@ -1,5 +1,5 @@
 /**
- * Created by lukas on 22.05.2017.
+ * Adder Thread representation of every line
  */
 public class Line extends Thread {
     private Data data;
@@ -16,6 +16,9 @@ public class Line extends Thread {
         this.scheme = scheme;
     }
 
+    /**
+     * Calculate whole line
+     */
     public void run(){
         boolean g1, g2, p1,p2;
         for (int i=0; i<lineHeight+1; i++){
@@ -60,6 +63,9 @@ public class Line extends Thread {
     }
 }
 
+/**
+ * Adder Thread representation of line calculating carry digit
+ */
 class CarryDigit extends Thread{
     private Data data;
 
@@ -67,6 +73,9 @@ class CarryDigit extends Thread{
         this.data = data;
     }
 
+    /**
+     * Calculate carry digit
+     */
     public void run(){
         boolean g = data.getGeneration(data.getHeight(), data.getWidth()-1);
         data.setCarry(g);

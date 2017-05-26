@@ -1,20 +1,7 @@
+/**
+ * Class represents whole data given to adder
+ */
 public class Data {
-    final int[][] SklanskyNodesScheme = new int[][]{
-            new int[]{-1,0,-1,2,-1,4,-1,6,-1,8,-1,10,-1,12,-1,14},
-            new int[]{-1,-1,1,1,-1,-1,5,5,-1,-1,9,9,-1,-1,13,13},
-            new int[]{-1,-1,-1,-1,3,3,3,3,-1,-1,-1,-1,11,11,11,11},
-            new int[]{-1,-1,-1,-1,-1,-1,-1,-1,7,7,7,7,7,7,7,7},
-            new int[]{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
-    };
-
-    final int[][] KoggeStoneNodesScheme = new int [][]{
-            new int[]{-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14},
-            new int[]{-1,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13},
-            new int[]{-1,-1,-1,-1,0,1,2,3,4,5,6,7,8,9,10,11},
-            new int[]{-1,-1,-1,-1,-1,-1,-1,-1,0,1,2,3,4,5,6,7},
-            new int[]{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
-    };
-
     private String firstNumber, secondNumber;
     private int width, height;
     private boolean[][] generations;
@@ -73,6 +60,12 @@ public class Data {
     public int getWidth() { return width;}
     public boolean[] getOutput() {return output;}
 
+    /**
+     * Returns generation
+     * @param i row
+     * @param j column
+     * @return generation if set
+     */
     public synchronized boolean getGeneration(int i, int j){
         while(!set[i][j]){
             try{
@@ -83,6 +76,12 @@ public class Data {
         return generations[i][j];
     }
 
+    /**
+     * Returns propagation
+     * @param i row
+     * @param j column
+     * @return propagation if set
+     */
     public synchronized boolean getPropagation(int i, int j){
         while(!set[i][j]){
             try{
@@ -93,6 +92,13 @@ public class Data {
         return propagations[i][j];
     }
 
+    /**
+     * Set a value of generation and propagation
+     * @param generation value of generation
+     * @param propagation value of propagation
+     * @param i row
+     * @param j column
+     */
     public synchronized void setGenerationAndPropagation(boolean generation, boolean propagation,int i, int j){
         generations[i][j] = generation;
         propagations[i][j] = propagation;
@@ -100,6 +106,11 @@ public class Data {
         notifyAll();
     }
 
+    /**
+     * Set a value of output digit
+     * @param value value of digit
+     * @param i index of digit
+     */
     public synchronized void setOutput(boolean value, int i){
         output[i] = value;
         outputSet[i] = true;
@@ -110,12 +121,19 @@ public class Data {
         return halfsums[i];
     }
 
+    /**
+     * Set carry digit
+     * @param value value of carry digit
+     */
     public synchronized void setCarry(boolean value) {
         output[width] = value;
         outputSet[width] = true;
         notifyAll();
     }
 
+    /**
+     * Display visualisation of generators
+     */
     public void showGenerators(){
         char c;
         System.out.print("     ");
@@ -163,6 +181,9 @@ public class Data {
         System.out.println("#");
     }
 
+    /**
+     * Display visualisation of graph
+     */
     public void showGraph(){
         char c;
         for (int i=1; i<=height; i++){
@@ -190,6 +211,9 @@ public class Data {
         }
     }
 
+    /**
+     * Display visualisation of output
+     */
     public void showOutput(){
         char c;
         System.out.print("     ");
@@ -210,6 +234,12 @@ public class Data {
         }
     }
 
+    /**
+     * Generate Kogge&Stone scheme
+     * @param width width of graph
+     * @param height height of graph
+     * @return Kogge&Stone scheme used by Adder
+     */
     public int[][] generateKoggeStone(int width, int height){
         int[][] scheme = new int[height+1][width];
         int counter, value;
@@ -230,6 +260,12 @@ public class Data {
         return scheme;
     }
 
+    /**
+     * Generate Sklansky scheme
+     * @param width width of graph
+     * @param height height of graph
+     * @return Sklansky scheme used by Adder
+     */
     public int[][] generateSklansky(int width, int height){
         int[][] scheme = new int[height+1][width];
         int counter, value=0, index;

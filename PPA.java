@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Main class
+ */
 public class PPA {
     static String  MENU = "--- MENU ---\n"+
             "1. Podaj liczby dziesietnie\n"+
@@ -96,6 +99,11 @@ public class PPA {
         } while (choice != 0);
     }
 
+    /**
+     * Method checks if given String consists of only '0' and '1'
+     * @param data String of binnary number
+     * @return true if there are only '0' and '1' in data otherwise false
+     */
     private static boolean checkData(String data){
         boolean ans = true;
         for (int i=0; i<data.length(); i++)

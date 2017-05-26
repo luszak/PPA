@@ -1,9 +1,11 @@
+/**
+ * Class represents whole adder with data and calculations
+ */
 public class Adder{
     private Data data;
     private Line[] line;
     private CarryDigit carryDigit;
     private boolean[] output;
-    // 1 - Sklansky, 0 - Kogge&Stone
     private boolean schemeType;
     int[][] scheme;
     int linesNumber;
@@ -35,7 +37,13 @@ public class Adder{
         this.output = data.getOutput();
 
     }
-    // Adds paddingSize zeros at the begining of the word
+
+    /**
+     * Add '0' to a left side of word
+     * @param word String to be fixed
+     * @param paddingSize number of '0' to be added
+     * @return String with added '0'
+     */
     private String fixLength(String word, int paddingSize){
         String w = word;
         for (int i=0; i<paddingSize; i++){
@@ -44,6 +52,9 @@ public class Adder{
         return w;
     }
 
+    /**
+     * Start threads calculating output
+     */
     public void calculate(){
         for (int i=0; i<linesNumber; i++){
             line[i].start();
@@ -63,6 +74,9 @@ public class Adder{
         return str;
     }
 
+    /**
+     * Display visualisation of a whole adder
+     */
     public void showGraph(){
         data.showGenerators();
         data.showGraph();
